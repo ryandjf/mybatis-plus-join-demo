@@ -13,7 +13,17 @@ public class ApplicationConfiguration {
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         var interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.H2));
+        interceptor.addInnerInterceptor(paginationInnerInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
+        PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor();
+        paginationInterceptor.setDbType(DbType.H2);
+        paginationInterceptor.setOptimizeJoin(true);
+        // 开启 count 的 join 优化,只针对部分 left join
+        paginationInterceptor.setOptimizeJoin(true);
+        return paginationInterceptor;
     }
 }

@@ -42,3 +42,21 @@ VALUES (1, 1, '活动内容'),
        (5, 5, '论坛内容'),
        (6, 1, '活动内容2'),
        (7, 1, '活动内容3');
+
+DELETE FROM author;
+INSERT INTO author (id, name, age)
+VALUES (1, 'Jone', 18),
+       (2, 'Jack', 19),
+       (3, 'Tom', 28),
+       (4, 'Sandy', 21);
+
+DELETE FROM book;
+INSERT INTO book (id, author_id, title, publisher)
+VALUES (1, 1, '数学', 'Pub A'),
+       (2, 1, '英语', 'Pub B'),
+       (3, 1, '体育', 'Pub C'),
+       (4, 3, '语文', 'Pub A'),
+       (5, 4, '物理', 'Pub A'),
+       (6, 5, '化学', 'Pub A'),
+       (7, 6, '生物', 'Pub A');
+

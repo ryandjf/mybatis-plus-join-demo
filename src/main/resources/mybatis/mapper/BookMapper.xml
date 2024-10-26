@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- artificial column -->
+<!--https://stackoverflow.com/questions/25303712/passing-a-non-column-parameter-in-a-mybatis-resultmap-to-a-nested-select -->
+<mapper namespace="com.example.mapper.AuthorMapper">
+    <resultMap id="author" type="com.example.AuthorDTO">
+        <id property="id" column="id" jdbcType="BIGINT" javaType="long"/>
+        <result property="title" column="title"/>
+        <collection property="books" ofType="com.example.BookDO"
+                    select="findBooksByAuthor"
+                    column="{authorId=id,publisher=publisher}" javaType="java.util.List" />
+    </resultMap>
+    <select id="findAuthorsWithBooks" resultMap="author">
+        select a.id as id,
+        a.name as name,
+        #{publisher} as publisher,
+        a.age as age
+        from author a
+    </select>
+    <select id="findBooksByAuthor"
+            resultType="com.example.BookDO">
+        select b.id as id,
+        b.author_id as author_id,
+        b.title as title,
+        b.publisher as publisher
+        from book b
+        where b.author_id = #{authorId} and b.publisher = #{publisher}
+    </select>
+</mapper>

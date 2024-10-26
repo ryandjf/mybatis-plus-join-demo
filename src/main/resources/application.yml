@@ -12,3 +12,20 @@ spring:
     console:
       enabled: true
     default_schema: foundation_database
+
+mybatis-plus:
+  map-underscore-to-camel-case: true
+  mapper-locations: classpath:/mybatis/mapper/**.xml
+#  global-config:
+#    db-config:
+#      logic-delete-field: is_del
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+logging:
+  level:
+    com:
+      example:
+        mapper: DEBUG
